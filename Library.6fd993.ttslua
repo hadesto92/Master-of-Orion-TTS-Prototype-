@@ -1,0 +1,114 @@
+--Library--
+--Author: Hadesto--
+
+--Fraction flage--
+local fractionFLAGE_SC = true
+local fractionFLAGE_PQ = true
+local fractionFLAGE_TROS = true
+local fractionFLAGE_BE = true
+local fractionFLAGE_DC = true
+local fractionFLAGE_KH = true
+
+--Set up fraction--
+function layOutObjects(data)
+    local decodedData = JSON.decode(data)
+    local bagGUID = decodedData.bagGUID
+    local objectPositions = decodedData.objectPositions
+    local buttonGUID = decodedData.buttonGUID
+
+    --print(bagGUID, objectPositions)
+
+    local bag = getObjectFromGUID(bagGUID)
+
+    if not bag then
+        print("Not found GIUD the bag: " .. bagGUID)
+        return
+    end
+
+    local objects = bag.getObjects()
+
+    for _, objData in ipairs(objects) do
+        local objGUID = objData.guid
+        if objectPositions[objGUID] then
+            local data = objectPositions[objGUID]
+
+            bag.takeObject({
+                guid = objGUID,
+                position = data.position,
+                rotation = data.rotation,
+                smooth = false
+            })
+        end
+    end
+
+    local buttonHide = getObjectFromGUID(buttonGUID)
+    --if buttonHide then
+        --buttonHide.call("hideButton")
+        --print("Obiekt został przeniesiony pod stół z biblioteki.")
+    --else
+        --print("Nie znaleziono obiektu o GUID: " .. buttonGUID)
+    --end
+
+end
+
+function isFractionGET(fractionFLAGE_name)
+    if fractionFLAGE_name == "fractionFLAGE_SC" then
+      return fractionFLAGE_SC
+    elseif fractionFLAGE_name == "fractionFLAGE_PQ" then
+      return fractionFLAGE_PQ
+    elseif fractionFLAGE_name == "fractionFLAGE_TROS" then
+      return fractionFLAGE_TROS
+    elseif fractionFLAGE_name == "fractionFLAGE_BE" then
+      return fractionFLAGE_BE
+    elseif fractionFLAGE_name == "fractionFLAGE_DC" then
+      return fractionFLAGE_DC
+    elseif fractionFLAGE_name == "fractionFLAGE_KH" then
+      return fractionFLAGE_KH
+    else
+      return
+    end
+end
+
+function setFractionFLAGE(fractionFLAGE_name)
+  if fractionFLAGE_name == "fractionFLAGE_SC" then
+    if fractionFLAGE_SC then
+      fractionFLAGE_SC = false
+    else
+      fractionFLAGE_SC = true
+    end
+  elseif fractionFLAGE_name == "fractionFLAGE_PQ" then
+    if fractionFLAGE_PQ then
+      fractionFLAGE_PQ = false
+    else
+      fractionFLAGE_PQ = true
+    end
+  elseif fractionFLAGE_name == "fractionFLAGE_TROS" then
+    if fractionFLAGE_TROS then
+      fractionFLAGE_TROS = false
+    else
+      fractionFLAGE_TROS = true
+    end
+  elseif fractionFLAGE_name == "fractionFLAGE_BE" then
+    if fractionFLAGE_BE then
+      fractionFLAGE_BE = false
+    else
+      fractionFLAGE_BE = true
+    end
+  elseif fractionFLAGE_name == "fractionFLAGE_DC" then
+    if fractionFLAGE_DC then
+      fractionFLAGE_DC = false
+    else
+      fractionFLAGE_DC = true
+    end
+  elseif fractionFLAGE_name == "fractionFLAGE_KH" then
+    if fractionFLAGE_KH then
+      fractionFLAGE_KH = false
+      --print(fractionFLAGE_KH)
+    else
+      fractionFLAGE_KH = true
+      --print(fractionFLAGE_KH)
+    end
+  else
+    return
+  end
+end

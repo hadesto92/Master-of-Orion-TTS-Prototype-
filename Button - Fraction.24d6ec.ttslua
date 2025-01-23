@@ -1,0 +1,244 @@
+--Button - PsilonQunata - PinkPlayer--
+--Author: Hadesto--
+
+--AUTOMA--
+local libraryGUID = "6fd993"
+local buttonGUID = "7e182a"
+local bagGUID_SC = "b5a1c4"
+local bagGUID_PQ = "e9eac3"
+local bagGUID_TROS = "657151"
+local bagGUID_BE = "10bd46"
+local bagGUID_DC = "ecc995"
+local bagGUID_KH = "737735"
+
+local getFraction_A = ""
+local getFraction_B = ""
+
+--Position AUTOMA 1--
+local objectPositions_AUTOMA_1 = {
+  ["1"] = {position = {x = -63.54, y = 1.25, z = 9.81}, rotation = {x = 0.41, y = 270.20, z = 0.71}},
+  ["2"] = {position = {x = -53.31, y = 0.92, z = 12.64}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["3"] = {position = {x = -51.66, y = 0.92, z = 12.71}, rotation = {x = 0.00, y = 45.00, z = 0.00}},
+  ["4"] = {position = {x = -50.07, y = 1.33, z = 12.68}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["5"] = {position = {x = -48.73, y = 1.33, z = 12.62}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["6"] = {position = {x = -47.39, y = 0.92, z = 12.49}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["7"] = {position = {x = -52.91, y = 0.97, z = 15.64}, rotation = {x = 0.00, y = 239.99, z = 0.00}},
+  ["8"] = {position = {x = -50.75, y = 0.96, z = 14.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["9"] = {position = {x = -48.32, y = 0.97, z = 14.67}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["10"] = {position = {x = -46.42, y = 0.96, z = 14.66}, rotation = {x = 0.00, y = 90.01, z = 0.00}},
+  ["11"] = {position = {x = -51.07, y = 0.96, z = 16.38}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["12"] = {position = {x = -49.55, y = 0.96, z = 16.49}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["13"] = {position = {x = -48.24, y = 0.96, z = 16.61}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["14"] = {position = {x = -47.09, y = 0.97, z = 16.72}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["15"] = {position = {x = -64.34, y = 1.69, z = 13.28}, rotation = {x = 0.42, y = 270.01, z = 0.72}},
+  ["16"] = {position = {x = -64.45, y = 1.66, z = 10.79}, rotation = {x = 0.42, y = 270.01, z = 0.71}},
+  ["17"] = {position = {x = -64.42, y = 1.63, z = 8.29}, rotation = {x = 0.41, y = 270.02, z = 0.71}},
+  ["18"] = {position = {x = -64.44, y = 1.60, z = 5.85}, rotation = {x = 0.41, y = 270.02, z = 0.71}}
+}
+
+--Position AUTOMA 2--
+local objectPositions_AUTOMA_2 = {
+  ["1"] = {position = {x = -63.56, y = 1.17, z = -7.93}, rotation = {x = 0.00, y = 269.88, z = 0.00}},
+  ["2"] = {position = {x = -53.37, y = 0.92, z = -13.82}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["3"] = {position = {x = -51.61, y = 0.92, z = -13.83}, rotation = {x = 0.00, y = 45.00, z = 0.00}},
+  ["4"] = {position = {x = -49.94, y = 1.33, z = -13.79}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["5"] = {position = {x = -48.63, y = 1.33, z = -13.74}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["6"] = {position = {x = -47.24, y = 0.92, z = -13.77}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["7"] = {position = {x = -52.91, y = 0.97, z = -15.64}, rotation = {x = 0.01, y = 240.02, z = 0.00}},
+  ["8"] = {position = {x = -50.57, y = 0.97, z = -15.72}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["9"] = {position = {x = -48.22, y = 0.96, z = -15.64}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["10"] = {position = {x = -46.23, y = 0.97, z = -15.60}, rotation = {x = 0.00, y = 269.99, z = 0.00}},
+  ["11"] = {position = {x = -46.37, y = 0.96, z = -17.26}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["12"] = {position = {x = -48.03, y = 0.96, z = -17.24}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["13"] = {position = {x = -49.67, y = 0.96, z = -17.19}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["14"] = {position = {x = -51.14, y = 0.97, z = -17.15}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["15"] = {position = {x = -64.38, y = 1.57, z = -4.46}, rotation = {x = 0.00, y = 269.64, z = 0.00}},
+  ["16"] = {position = {x = -64.47, y = 1.57, z = -6.95}, rotation = {x = 0.00, y = 269.64, z = 0.00}},
+  ["17"] = {position = {x = -64.43, y = 1.57, z = -9.45}, rotation = {x = 0.00, y = 269.64, z = 0.00}},
+  ["18"] = {position = {x = -64.43, y = 1.57, z = -11.89}, rotation = {x = 0.00, y = 269.64, z = 0.00}}
+}
+
+--Klackon Hive--
+local objectToBag_KH = {
+  "c3abd1", "374eb7", "c7014e", "21679c", "17ced9", "91260d", "c02c09", "e2a2c5",
+  "cf23d6", "e105b4", "cd7bc3", "d46521", "a4ba34", "e28ff0", "98e050", "f83c91",
+  "f8dba2", "bb79d5"
+}
+
+--Bulrathi Empire--
+local objectToBag_BE = {
+  "0de456", "96110a", "5fc2bb", "783150", "94e12b", "e315a0", "141adb", "76e299",
+  "2a206f", "a6a18d", "e20327", "51406c", "8187da", "6b10a5", "9d3f45", "fe2e0d",
+  "47dcc7", "e47d19"
+}
+
+--The Republic of Sol--
+local objectToBag_TROS = {
+  "13ec77", "d42b88", "a79eed", "5a95f9", "ac26dd", "1ddd24", "ef8462", "ac350b",
+  "589ea6", "c56b7d", "9b8f17", "6fe09d", "ff6c62", "c96fb5", "0bfd0d", "85451f",
+  "221e20", "1687df"
+}
+
+--Darlok Cabal--
+local objectToBag_DC = {
+  "6365b8", "1a2513", "d463a3", "2ce4f4", "16e657", "ec8dfb", "a9772a", "f3cac4",
+  "e1923d", "ea670d", "88eb5d", "5807c8", "a9f9d9", "9f704c", "5e6663", "9d9a95",
+  "2c6d5b", "6668fe"
+}
+
+--Psilon Quanta--
+local objectToBag_PQ = {
+  "2f16d8", "300040", "863efa", "75d995", "b76ef1", "7509aa", "71cc73", "c0b703",
+  "11a311", "af3f4f", "810b2a", "41819f", "501981", "5bd1eb", "bd2aad", "babba8",
+  "3fe47e", "3e4c89"
+}
+
+--Silicoid Crag--
+local objectToBag_SC = {
+  "e87ceb", "fbdcb1", "c6e01a", "09a2fb", "a77c20", "ffe865", "6101ad", "c94b6b",
+  "d54325", "a40d73", "f5f9c4", "fca574", "418a20", "f49694", "2dcc4d", "7ae73b",
+  "00ea3f", "c63f1e"
+}
+
+function onLoad()
+    spawnButton_AUTOMA_1()
+    spawnButton_AUTOMA_2()
+end
+
+function spawnButton_AUTOMA_1()
+  self.createButton({
+      click_function = "layOutObjects_AUTOMA_1",
+      function_owner = self,
+      label = "Add 1 Automa",
+      position = {0, 0.3, 0},
+      rotation = {0, -90, 0},
+      width = 2500,
+      height = 600,
+      font_size = 300,
+      color = {0.16862745098039217, 0.43529411764705883, 0.6627450980392157},
+      font_color = {1, 1, 1}
+
+  })
+end
+
+function spawnButton_AUTOMA_2()
+  self.createButton({
+      click_function = "layOutObjects_AUTOMA_TWO",
+      function_owner = self,
+      label = "Add 2 Automas",
+      position = {1.6, 0.3, 0},
+      rotation = {0, -90, 0},
+      width = 2500,
+      height = 600,
+      font_size = 300,
+      color = {0.16862745098039217, 0.43529411764705883, 0.6627450980392157},
+      font_color = {1, 1, 1}
+  })
+end
+
+function layOutObjects_AUTOMA_TWO()
+  layOutObjects_AUTOMA_1()
+  layOutObjects_AUTOMA_2()
+end
+
+function layOutObjects_AUTOMA_1()
+  if getFraction_A == "" then
+    local fractionTable = {"SC", "TROS", "BE", "KH", "DC", "PQ"}
+    while true do
+      local rIndex = math.random(1, #fractionTable)
+      local randomFraction = fractionTable[rIndex]
+
+      layOutObject(randomFraction, "A")
+
+      if getFraction_A ~= "" then
+        break
+      end
+    end
+  else
+    return
+  end
+end
+
+function layOutObjects_AUTOMA_2()
+  if getFraction_B == "" then
+    local fractionTable = {"SC", "TROS", "BE", "KH", "DC", "PQ"}
+    while true do
+      local rIndex = math.random(1, #fractionTable)
+      local randomFraction = fractionTable[rIndex]
+
+      layOutObject(randomFraction, "B")
+
+      if getFraction_B ~= "" then
+        break
+      end
+    end
+  else
+    return
+  end
+end
+
+function layOutObject(fraction, automa)
+  local library = getObjectFromGUID(libraryGUID)
+  local fractionFlage = ""
+  local bagGUID = ""
+  local objectToBag = {}
+  if fraction == "SC" then
+    fractionFlage = "fractionFLAGE_SC"
+    objectToBag = objectToBag_SC
+    bagGUID = bagGUID_SC
+  elseif fraction == "TROS" then
+    fractionFlage = "fractionFLAGE_TROS"
+    objectToBag = objectToBag_TROS
+    bagGUID = bagGUID_TROS
+  elseif fraction == "BE" then
+    fractionFlage = "fractionFLAGE_BE"
+    objectToBag = objectToBag_BE
+    bagGUID = bagGUID_BE
+  elseif fraction == "KH" then
+    fractionFlage = "fractionFLAGE_KH"
+    objectToBag = objectToBag_KH
+    bagGUID = bagGUID_KH
+  elseif fraction == "DC" then
+    fractionFlage = "fractionFLAGE_DC"
+    objectToBag = objectToBag_DC
+    bagGUID = bagGUID_DC
+  elseif fraction == "PQ" then
+    fractionFlage = "fractionFLAGE_PQ"
+    objectToBag = objectToBag_PQ
+    bagGUID = bagGUID_PQ
+  end
+
+  local objectPositions_AUTOMA = {}
+  if automa == "A" then
+    objectPositions_AUTOMA = objectPositions_AUTOMA_1
+    getFraction_A = fraction
+  elseif automa == "B" then
+    objectPositions_AUTOMA = objectPositions_AUTOMA_2
+    getFraction_B = fraction
+  end
+
+  local bag = getObjectFromGUID(bagGUID)
+  if not bag then
+    return
+  end
+
+  for index, data in pairs(objectPositions_AUTOMA) do
+    local objectID = objectToBag[tonumber(index)] -- Pobranie ID obiektu na podstawie indeksu
+    if objectID then
+      local params = {
+        position = data.position,
+        rotation = data.rotation
+      }
+
+      -- Wyjęcie obiektu z worka
+      local obj = bag.takeObject({
+        guid = objectID,
+        position = params.position,
+        rotation = params.rotation,
+        smooth = false
+      })
+    end
+  end
+
+  library.call("setFractionFLAGE", fractionFlage)
+end

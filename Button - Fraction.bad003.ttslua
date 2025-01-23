@@ -1,0 +1,1404 @@
+--Button - PsilonQunata - PinkPlayer--
+--Author: Hadesto--
+
+
+--BLUE--
+local libraryGUID = "6fd993"
+local buttonGUID = "bad003"
+local bagGUID_SC = "b5a1c4"
+local bagGUID_PQ = "e9eac3"
+local bagGUID_TROS = "657151"
+local bagGUID_BE = "10bd46"
+local bagGUID_DC = "ecc995"
+local bagGUID_KH = "737735"
+
+local getFraction = ""
+local buttonsSpawned = false
+local randomFlage = false
+
+--Klackon Hive--
+local objectToBag_KH = {
+  "c02c09", "a4ba34", "e28ff0", "d46521", "e2a2c5", "cd7bc3", "e105b4", "cf23d6",
+  "91260d", "17ced9", "21679c", "c7014e", "374eb7", "1f1965", "bb2a70", "6241f3",
+  "45f843", "780f72", "18f8b1", "ffe44a", "4ac837", "02b414", "ac692d", "9b58d4",
+  "4a0ca9", "57fe4b", "af8ecc", "8b202d", "0b42c0", "2fde57", "2536c3", "3988ac"
+}
+
+local objectPositions_KH_White = {
+  ["c02c09"] = {position = {x = -16.77, y = 1.08, z = 20.12}, rotation = {x = 355.70, y = 329.92, z = 2.49}},
+  ["a4ba34"] = {position = {x = -30.53, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e28ff0"] = {position = {x = -31.82, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["d46521"] = {position = {x = -33.24, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e2a2c5"] = {position = {x = -40.76, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["cd7bc3"] = {position = {x = -34.59, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e105b4"] = {position = {x = -36.36, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["cf23d6"] = {position = {x = -38.46, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["91260d"] = {position = {x = -8.52, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["17ced9"] = {position = {x = -10.02, y = 1.07, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["21679c"] = {position = {x = -11.52, y = 1.07, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["c7014e"] = {position = {x = -13.02, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 225.00, z = 0.00}},
+  ["374eb7"] = {position = {x = -14.52, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["1f1965"] = {position = {x = -18.51, y = 1.17, z = 23.45}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["bb2a70"] = {position = {x = -20.65, y = 1.17, z = 23.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["6241f3"] = {position = {x = -22.82, y = 1.17, z = 31.09}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["45f843"] = {position = {x = -18.71, y = 1.17, z = 31.07}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["780f72"] = {position = {x = -20.76, y = 1.17, z = 31.10}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["18f8b1"] = {position = {x = -18.66, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["ffe44a"] = {position = {x = -20.77, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["4ac837"] = {position = {x = -36.09, y = 0.96, z = 31.29}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["02b414"] = {position = {x = -48.89, y = 0.96, z = 28.75}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ac692d"] = {position = {x = -30.38, y = 1.36, z = 21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["9b58d4"] = {position = {x = -30.43, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["4a0ca9"] = {position = {x = -36.01, y = 1.36, z = 22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["57fe4b"] = {position = {x = -36.02, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["af8ecc"] = {position = {x = -31.53, y = 1.36, z = 31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["8b202d"] = {position = {x = -34.46, y = 1.36, z = 31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["0b42c0"] = {position = {x = -37.34, y = 1.36, z = 31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2fde57"] = {position = {x = -40.18, y = 1.36, z = 31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2536c3"] = {position = {x = -31.07, y = 1.16, z = 24.32}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["3988ac"] = {position = {x = -9.65, y = 1.41, z = 31.08}, rotation = {x = 0.00, y = 0.00, z = 0.00}}
+}
+
+local objectPositions_KH_Red = {
+  ["c02c09"] = {position = {x = -16.77, y = 0.96, z = -20.12}, rotation = {x = 0.00, y = 150.00, z = 0.00}},
+  ["a4ba34"] = {position = {x = -30.53, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e28ff0"] = {position = {x = -31.82, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["d46521"] = {position = {x = -33.24, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e2a2c5"] = {position = {x = -40.76, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["cd7bc3"] = {position = {x = -34.59, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e105b4"] = {position = {x = -36.36, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["cf23d6"] = {position = {x = -38.46, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["91260d"] = {position = {x = -8.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["17ced9"] = {position = {x = -10.00, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["21679c"] = {position = {x = -11.50, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["c7014e"] = {position = {x = -13.00, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 45.00, z = 0.00}},
+  ["374eb7"] = {position = {x = -14.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["1f1965"] = {position = {x = -17.57, y = 1.17, z = -23.45}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["bb2a70"] = {position = {x = -15.43, y = 1.17, z = -23.44}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["6241f3"] = {position = {x = -13.20, y = 1.24, z = -31.09}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["45f843"] = {position = {x = -17.31, y = 1.30, z = -31.07}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["780f72"] = {position = {x = -15.26, y = 1.27, z = -31.10}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["18f8b1"] = {position = {x = -17.36, y = 1.30, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["ffe44a"] = {position = {x = -15.25, y = 1.27, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["4ac837"] = {position = {x = -36.09, y = 0.96, z = -31.29}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["02b414"] = {position = {x = -48.89, y = 0.96, z = -28.75}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["ac692d"] = {position = {x = -40.48, y = 1.36, z = -21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["9b58d4"] = {position = {x = -40.44, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["4a0ca9"] = {position = {x = -34.85, y = 1.36, z = -22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["57fe4b"] = {position = {x = -34.85, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["af8ecc"] = {position = {x = -40.65, y = 1.36, z = -31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["8b202d"] = {position = {x = -37.72, y = 1.36, z = -31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["0b42c0"] = {position = {x = -34.84, y = 1.36, z = -31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2fde57"] = {position = {x = -32.00, y = 1.36, z = -31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2536c3"] = {position = {x = -39.79, y = 1.16, z = -24.32}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["3988ac"] = {position = {x = -26.37, y = 1.17, z = -31.08}, rotation = {x = 0.00, y = 180.00, z = 0.00}}
+}
+
+local objectPositions_KH_Blue = {
+  ["c02c09"] = {position = {x = 16.77, y = 1.08, z = 20.12}, rotation = {x = 355.67, y = 329.91, z = 2.50}},
+  ["a4ba34"] = {position = {x = 30.53, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e28ff0"] = {position = {x = 31.82, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["d46521"] = {position = {x = 33.24, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e2a2c5"] = {position = {x = 40.76, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["cd7bc3"] = {position = {x = 34.59, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e105b4"] = {position = {x = 36.36, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["cf23d6"] = {position = {x = 38.46, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["91260d"] = {position = {x = 8.43, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["17ced9"] = {position = {x = 9.93, y = 1.07, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["21679c"] = {position = {x = 11.43, y = 1.07, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["c7014e"] = {position = {x = 12.93, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 225.00, z = 0.00}},
+  ["374eb7"] = {position = {x = 14.43, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["1f1965"] = {position = {x = 17.57, y = 1.17, z = 23.45}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["bb2a70"] = {position = {x = 15.43, y = 1.17, z = 23.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["6241f3"] = {position = {x = 13.26, y = 1.17, z = 31.09}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["45f843"] = {position = {x = 17.37, y = 1.17, z = 31.07}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["780f72"] = {position = {x = 15.33, y = 1.17, z = 31.10}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["18f8b1"] = {position = {x = 17.42, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["ffe44a"] = {position = {x = 15.31, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["4ac837"] = {position = {x = 36.09, y = 0.96, z = 31.29}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["02b414"] = {position = {x = 48.89, y = 0.96, z = 28.75}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ac692d"] = {position = {x = 40.48, y = 1.36, z = 21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["9b58d4"] = {position = {x = 40.44, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["4a0ca9"] = {position = {x = 34.85, y = 1.36, z = 22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["57fe4b"] = {position = {x = 34.85, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["af8ecc"] = {position = {x = 40.65, y = 1.36, z = 31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["8b202d"] = {position = {x = 37.72, y = 1.36, z = 31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["0b42c0"] = {position = {x = 34.84, y = 1.36, z = 31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2fde57"] = {position = {x = 32.00, y = 1.36, z = 31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2536c3"] = {position = {x = 39.79, y = 1.16, z = 24.32}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["3988ac"] = {position = {x = 26.37, y = 1.17, z = 31.08}, rotation = {x = 0.00, y = 0.00, z = 0.00}}
+}
+
+local objectPositions_KH_Pink = {
+  ["c02c09"] = {position = {x = 16.77, y = 0.96, z = -20.12}, rotation = {x = 0.00, y = 150.00, z = 0.00}},
+  ["a4ba34"] = {position = {x = 30.53, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e28ff0"] = {position = {x = 31.82, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["d46521"] = {position = {x = 33.24, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e2a2c5"] = {position = {x = 40.76, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["cd7bc3"] = {position = {x = 34.59, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e105b4"] = {position = {x = 36.36, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["cf23d6"] = {position = {x = 38.46, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["91260d"] = {position = {x = 8.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["17ced9"] = {position = {x = 10.00, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["21679c"] = {position = {x = 11.50, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["c7014e"] = {position = {x = 13.00, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 45.00, z = 0.00}},
+  ["374eb7"] = {position = {x = 14.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["1f1965"] = {position = {x = 18.51, y = 1.17, z = -23.45}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["bb2a70"] = {position = {x = 20.65, y = 1.17, z = -23.43}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["6241f3"] = {position = {x = 22.77, y = 1.24, z = -31.09}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["45f843"] = {position = {x = 18.65, y = 1.30, z = -31.07}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["780f72"] = {position = {x = 20.71, y = 1.27, z = -31.10}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["18f8b1"] = {position = {x = 18.61, y = 1.30, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["ffe44a"] = {position = {x = 20.72, y = 1.27, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["4ac837"] = {position = {x = 36.09, y = 0.96, z = -31.29}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["02b414"] = {position = {x = 48.89, y = 0.96, z = -28.75}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["ac692d"] = {position = {x = 30.38, y = 1.36, z = -21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["9b58d4"] = {position = {x = 30.43, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["4a0ca9"] = {position = {x = 36.01, y = 1.36, z = -22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["57fe4b"] = {position = {x = 36.02, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["af8ecc"] = {position = {x = 31.53, y = 1.36, z = -31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["8b202d"] = {position = {x = 34.46, y = 1.36, z = -31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["0b42c0"] = {position = {x = 37.34, y = 1.36, z = -31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2fde57"] = {position = {x = 40.18, y = 1.36, z = -31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2536c3"] = {position = {x = 31.07, y = 1.16, z = -24.32}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["3988ac"] = {position = {x = 9.65, y = 1.41, z = -31.08}, rotation = {x = 0.00, y = 180.00, z = 0.00}}
+}
+
+--Bulrathi Empire--
+local objectToBag_BE = {
+  "141adb", "8187da", "6b10a5", "51406c", "76e299", "e20327", "a6a18d", "2a206f",
+  "e315a0", "94e12b", "783150", "5fc2bb", "96110a", "7ce994", "bb8fe6", "481ca8",
+  "3260fc", "59b0b0", "fa2236", "8d06bc", "4be1ae", "4e4dbb", "179036", "c1942e",
+  "ffd2b3", "51532f", "bccaf7", "adb282", "2d3513", "48eb1a", "b4a3f0", "cbeee8"
+}
+
+local objectPositions_BE_White = {
+  ["141adb"] = {position = {x = -16.77, y = 1.08, z = 20.12}, rotation = {x = 355.70, y = 329.92, z = 2.49}},
+  ["8187da"] = {position = {x = -30.53, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["6b10a5"] = {position = {x = -31.82, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["51406c"] = {position = {x = -33.24, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["76e299"] = {position = {x = -40.76, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e20327"] = {position = {x = -34.59, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["a6a18d"] = {position = {x = -36.36, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2a206f"] = {position = {x = -38.46, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e315a0"] = {position = {x = -8.52, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["94e12b"] = {position = {x = -10.02, y = 1.07, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["783150"] = {position = {x = -11.52, y = 1.07, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["5fc2bb"] = {position = {x = -13.02, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 225.00, z = 0.00}},
+  ["96110a"] = {position = {x = -14.52, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7ce994"] = {position = {x = -18.51, y = 1.17, z = 23.45}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["bb8fe6"] = {position = {x = -20.65, y = 1.17, z = 23.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["481ca8"] = {position = {x = -22.82, y = 1.17, z = 31.09}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["3260fc"] = {position = {x = -18.71, y = 1.17, z = 31.07}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["59b0b0"] = {position = {x = -20.76, y = 1.17, z = 31.10}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["fa2236"] = {position = {x = -18.66, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["8d06bc"] = {position = {x = -20.77, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["4be1ae"] = {position = {x = -36.09, y = 0.96, z = 31.29}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["4e4dbb"] = {position = {x = -48.89, y = 0.96, z = 28.75}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["179036"] = {position = {x = -30.38, y = 1.36, z = 21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c1942e"] = {position = {x = -30.43, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ffd2b3"] = {position = {x = -36.01, y = 1.36, z = 22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["51532f"] = {position = {x = -36.02, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["bccaf7"] = {position = {x = -31.53, y = 1.36, z = 31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["adb282"] = {position = {x = -34.46, y = 1.36, z = 31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2d3513"] = {position = {x = -37.34, y = 1.36, z = 31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["48eb1a"] = {position = {x = -40.18, y = 1.36, z = 31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["b4a3f0"] = {position = {x = -31.07, y = 1.16, z = 24.32}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["cbeee8"] = {position = {x = -9.65, y = 1.41, z = 31.08}, rotation = {x = 0.00, y = 0.00, z = 0.00}}
+}
+
+local objectPositions_BE_Red = {
+  ["141adb"] = {position = {x = -16.77, y = 0.96, z = -20.12}, rotation = {x = 0.00, y = 150.00, z = 0.00}},
+  ["8187da"] = {position = {x = -30.53, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["6b10a5"] = {position = {x = -31.82, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["51406c"] = {position = {x = -33.24, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["76e299"] = {position = {x = -40.76, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e20327"] = {position = {x = -34.59, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["a6a18d"] = {position = {x = -36.36, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2a206f"] = {position = {x = -38.46, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e315a0"] = {position = {x = -8.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["94e12b"] = {position = {x = -10.00, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["783150"] = {position = {x = -11.50, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["5fc2bb"] = {position = {x = -13.00, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 45.00, z = 0.00}},
+  ["96110a"] = {position = {x = -14.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["7ce994"] = {position = {x = -17.57, y = 1.17, z = -23.45}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["bb8fe6"] = {position = {x = -15.43, y = 1.17, z = -23.44}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["481ca8"] = {position = {x = -13.20, y = 1.24, z = -31.09}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["3260fc"] = {position = {x = -17.31, y = 1.30, z = -31.07}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["59b0b0"] = {position = {x = -15.26, y = 1.27, z = -31.10}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["fa2236"] = {position = {x = -17.36, y = 1.30, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["8d06bc"] = {position = {x = -15.25, y = 1.27, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["4be1ae"] = {position = {x = -36.09, y = 0.96, z = -31.29}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["4e4dbb"] = {position = {x = -48.89, y = 0.96, z = -28.75}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["179036"] = {position = {x = -40.48, y = 1.36, z = -21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c1942e"] = {position = {x = -40.44, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ffd2b3"] = {position = {x = -34.85, y = 1.36, z = -22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["51532f"] = {position = {x = -34.85, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["bccaf7"] = {position = {x = -40.65, y = 1.36, z = -31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["adb282"] = {position = {x = -37.72, y = 1.36, z = -31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2d3513"] = {position = {x = -34.84, y = 1.36, z = -31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["48eb1a"] = {position = {x = -32.00, y = 1.36, z = -31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["b4a3f0"] = {position = {x = -39.79, y = 1.16, z = -24.32}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["cbeee8"] = {position = {x = -26.37, y = 1.17, z = -31.08}, rotation = {x = 0.00, y = 180.00, z = 0.00}}
+}
+
+local objectPositions_BE_Blue = {
+  ["141adb"] = {position = {x = 16.77, y = 1.08, z = 20.12}, rotation = {x = 355.67, y = 329.91, z = 2.50}},
+  ["8187da"] = {position = {x = 30.53, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["6b10a5"] = {position = {x = 31.82, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["51406c"] = {position = {x = 33.24, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["76e299"] = {position = {x = 40.76, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e20327"] = {position = {x = 34.59, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["a6a18d"] = {position = {x = 36.36, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2a206f"] = {position = {x = 38.46, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e315a0"] = {position = {x = 8.43, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["94e12b"] = {position = {x = 9.93, y = 1.07, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["783150"] = {position = {x = 11.43, y = 1.07, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["5fc2bb"] = {position = {x = 12.93, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 225.00, z = 0.00}},
+  ["96110a"] = {position = {x = 14.43, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7ce994"] = {position = {x = 17.57, y = 1.17, z = 23.45}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["bb8fe6"] = {position = {x = 15.43, y = 1.17, z = 23.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["481ca8"] = {position = {x = 13.26, y = 1.17, z = 31.09}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["3260fc"] = {position = {x = 17.37, y = 1.17, z = 31.07}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["59b0b0"] = {position = {x = 15.33, y = 1.17, z = 31.10}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["fa2236"] = {position = {x = 17.42, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["8d06bc"] = {position = {x = 15.31, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["4be1ae"] = {position = {x = 36.09, y = 0.96, z = 31.29}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["4e4dbb"] = {position = {x = 48.89, y = 0.96, z = 28.75}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["179036"] = {position = {x = 40.48, y = 1.36, z = 21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c1942e"] = {position = {x = 40.44, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ffd2b3"] = {position = {x = 34.85, y = 1.36, z = 22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["51532f"] = {position = {x = 34.85, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["bccaf7"] = {position = {x = 40.65, y = 1.36, z = 31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["adb282"] = {position = {x = 37.72, y = 1.36, z = 31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2d3513"] = {position = {x = 34.84, y = 1.36, z = 31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["48eb1a"] = {position = {x = 32.00, y = 1.36, z = 31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["b4a3f0"] = {position = {x = 39.79, y = 1.16, z = 24.32}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["cbeee8"] = {position = {x = 26.37, y = 1.17, z = 31.08}, rotation = {x = 0.00, y = 0.00, z = 0.00}}
+}
+
+local objectPositions_BE_Pink = {
+  ["141adb"] = {position = {x = 16.77, y = 0.96, z = -20.12}, rotation = {x = 0.00, y = 150.00, z = 0.00}},
+  ["8187da"] = {position = {x = 30.53, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["6b10a5"] = {position = {x = 31.82, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["51406c"] = {position = {x = 33.24, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["76e299"] = {position = {x = 40.76, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e20327"] = {position = {x = 34.59, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["a6a18d"] = {position = {x = 36.36, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2a206f"] = {position = {x = 38.46, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e315a0"] = {position = {x = 8.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["94e12b"] = {position = {x = 10.00, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["783150"] = {position = {x = 11.50, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["5fc2bb"] = {position = {x = 13.00, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 45.00, z = 0.00}},
+  ["96110a"] = {position = {x = 14.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["7ce994"] = {position = {x = 18.51, y = 1.17, z = -23.45}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["bb8fe6"] = {position = {x = 20.65, y = 1.17, z = -23.43}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["481ca8"] = {position = {x = 22.77, y = 1.24, z = -31.09}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["3260fc"] = {position = {x = 18.65, y = 1.30, z = -31.07}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["59b0b0"] = {position = {x = 20.71, y = 1.27, z = -31.10}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["fa2236"] = {position = {x = 18.61, y = 1.30, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["8d06bc"] = {position = {x = 20.72, y = 1.27, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["4be1ae"] = {position = {x = 36.09, y = 0.96, z = -31.29}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["4e4dbb"] = {position = {x = 48.89, y = 0.96, z = -28.75}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["179036"] = {position = {x = 30.38, y = 1.36, z = -21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c1942e"] = {position = {x = 30.43, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ffd2b3"] = {position = {x = 36.01, y = 1.36, z = -22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["51532f"] = {position = {x = 36.02, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["bccaf7"] = {position = {x = 31.53, y = 1.36, z = -31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["adb282"] = {position = {x = 34.46, y = 1.36, z = -31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2d3513"] = {position = {x = 37.34, y = 1.36, z = -31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["48eb1a"] = {position = {x = 40.18, y = 1.36, z = -31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["b4a3f0"] = {position = {x = 31.07, y = 1.16, z = -24.32}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["cbeee8"] = {position = {x = 9.65, y = 1.41, z = -31.08}, rotation = {x = 0.00, y = 180.00, z = 0.00}}
+}
+
+--The Republic of Sol--
+local objectToBag_TROS = {
+  "ef8462", "ff6c62", "c96fb5", "6fe09d", "ac350b", "9b8f17", "c56b7d", "589ea6",
+  "1ddd24", "ac26dd", "5a95f9", "a79eed", "d42b88", "48d8b9", "40e5b5", "4e7a0a",
+  "e867cd", "d1e5e5", "dee4c2", "a8f3be", "7e1849", "52d635", "1f16c7", "5b5f61",
+  "cfe28e", "743ac1", "655cb8", "07f0ba", "fc2206", "e53a65", "537f39", "6bcf09"
+}
+
+local objectPositions_TROS_White = {
+  ["ef8462"] = {position = {x = -16.77, y = 1.08, z = 20.12}, rotation = {x = 355.70, y = 329.92, z = 2.49}},
+  ["ff6c62"] = {position = {x = -30.53, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c96fb5"] = {position = {x = -31.82, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["6fe09d"] = {position = {x = -33.24, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ac350b"] = {position = {x = -40.76, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["9b8f17"] = {position = {x = -34.59, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c56b7d"] = {position = {x = -36.36, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["589ea6"] = {position = {x = -38.46, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["1ddd24"] = {position = {x = -8.52, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ac26dd"] = {position = {x = -10.02, y = 1.07, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["5a95f9"] = {position = {x = -11.52, y = 1.07, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["a79eed"] = {position = {x = -13.02, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 225.00, z = 0.00}},
+  ["d42b88"] = {position = {x = -14.52, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["48d8b9"] = {position = {x = -18.51, y = 1.17, z = 23.45}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["40e5b5"] = {position = {x = -20.65, y = 1.17, z = 23.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["4e7a0a"] = {position = {x = -22.82, y = 1.17, z = 31.09}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["e867cd"] = {position = {x = -18.71, y = 1.17, z = 31.07}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["d1e5e5"] = {position = {x = -20.76, y = 1.17, z = 31.10}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["dee4c2"] = {position = {x = -18.66, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["a8f3be"] = {position = {x = -20.77, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["7e1849"] = {position = {x = -36.09, y = 0.96, z = 31.29}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["52d635"] = {position = {x = -48.89, y = 0.96, z = 28.75}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["1f16c7"] = {position = {x = -30.38, y = 1.36, z = 21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5b5f61"] = {position = {x = -30.43, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["cfe28e"] = {position = {x = -36.01, y = 1.36, z = 22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["743ac1"] = {position = {x = -36.02, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["655cb8"] = {position = {x = -31.53, y = 1.36, z = 31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["07f0ba"] = {position = {x = -34.46, y = 1.36, z = 31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["fc2206"] = {position = {x = -37.34, y = 1.36, z = 31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e53a65"] = {position = {x = -40.18, y = 1.36, z = 31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["537f39"] = {position = {x = -31.07, y = 1.16, z = 24.32}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["6bcf09"] = {position = {x = -9.65, y = 1.41, z = 31.08}, rotation = {x = 0.00, y = 0.00, z = 0.00}}
+}
+
+local objectPositions_TROS_Red = {
+  ["ef8462"] = {position = {x = -16.77, y = 0.96, z = -20.12}, rotation = {x = 0.00, y = 150.00, z = 0.00}},
+  ["ff6c62"] = {position = {x = -30.53, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c96fb5"] = {position = {x = -31.82, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["6fe09d"] = {position = {x = -33.24, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ac350b"] = {position = {x = -40.76, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["9b8f17"] = {position = {x = -34.59, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c56b7d"] = {position = {x = -36.36, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["589ea6"] = {position = {x = -38.46, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["1ddd24"] = {position = {x = -8.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["ac26dd"] = {position = {x = -10.00, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["5a95f9"] = {position = {x = -11.50, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["a79eed"] = {position = {x = -13.00, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 45.00, z = 0.00}},
+  ["d42b88"] = {position = {x = -14.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["48d8b9"] = {position = {x = -17.57, y = 1.17, z = -23.45}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["40e5b5"] = {position = {x = -15.43, y = 1.17, z = -23.44}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["4e7a0a"] = {position = {x = -13.20, y = 1.24, z = -31.09}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["e867cd"] = {position = {x = -17.31, y = 1.30, z = -31.07}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["d1e5e5"] = {position = {x = -15.26, y = 1.27, z = -31.10}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["dee4c2"] = {position = {x = -17.36, y = 1.30, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["a8f3be"] = {position = {x = -15.25, y = 1.27, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["7e1849"] = {position = {x = -36.09, y = 0.96, z = -31.29}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["52d635"] = {position = {x = -48.89, y = 0.96, z = -28.75}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["1f16c7"] = {position = {x = -40.48, y = 1.36, z = -21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5b5f61"] = {position = {x = -40.44, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["cfe28e"] = {position = {x = -34.85, y = 1.36, z = -22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["743ac1"] = {position = {x = -34.85, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["655cb8"] = {position = {x = -40.65, y = 1.36, z = -31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["07f0ba"] = {position = {x = -37.72, y = 1.36, z = -31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["fc2206"] = {position = {x = -34.84, y = 1.36, z = -31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e53a65"] = {position = {x = -32.00, y = 1.36, z = -31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["537f39"] = {position = {x = -39.79, y = 1.16, z = -24.32}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["6bcf09"] = {position = {x = -26.37, y = 1.17, z = -31.08}, rotation = {x = 0.00, y = 180.00, z = 0.00}}
+}
+
+local objectPositions_TROS_Blue = {
+  ["ef8462"] = {position = {x = 16.77, y = 1.08, z = 20.12}, rotation = {x = 355.67, y = 329.91, z = 2.50}},
+  ["ff6c62"] = {position = {x = 30.53, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c96fb5"] = {position = {x = 31.82, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["6fe09d"] = {position = {x = 33.24, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ac350b"] = {position = {x = 40.76, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["9b8f17"] = {position = {x = 34.59, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c56b7d"] = {position = {x = 36.36, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["589ea6"] = {position = {x = 38.46, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["1ddd24"] = {position = {x = 8.43, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ac26dd"] = {position = {x = 9.93, y = 1.07, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["5a95f9"] = {position = {x = 11.43, y = 1.07, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["a79eed"] = {position = {x = 12.93, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 225.00, z = 0.00}},
+  ["d42b88"] = {position = {x = 14.43, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["48d8b9"] = {position = {x = 17.57, y = 1.17, z = 23.45}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["40e5b5"] = {position = {x = 15.43, y = 1.17, z = 23.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["4e7a0a"] = {position = {x = 13.26, y = 1.17, z = 31.09}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["e867cd"] = {position = {x = 17.37, y = 1.17, z = 31.07}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["d1e5e5"] = {position = {x = 15.33, y = 1.17, z = 31.10}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["dee4c2"] = {position = {x = 17.42, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["a8f3be"] = {position = {x = 15.31, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["7e1849"] = {position = {x = 36.09, y = 0.96, z = 31.29}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["52d635"] = {position = {x = 48.89, y = 0.96, z = 28.75}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["1f16c7"] = {position = {x = 40.48, y = 1.36, z = 21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5b5f61"] = {position = {x = 40.44, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["cfe28e"] = {position = {x = 34.85, y = 1.36, z = 22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["743ac1"] = {position = {x = 34.85, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["655cb8"] = {position = {x = 40.65, y = 1.36, z = 31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["07f0ba"] = {position = {x = 37.72, y = 1.36, z = 31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["fc2206"] = {position = {x = 34.84, y = 1.36, z = 31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e53a65"] = {position = {x = 32.00, y = 1.36, z = 31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["537f39"] = {position = {x = 39.79, y = 1.16, z = 24.32}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["6bcf09"] = {position = {x = 26.37, y = 1.17, z = 31.08}, rotation = {x = 0.00, y = 0.00, z = 0.00}}
+}
+
+local objectPositions_TROS_Pink = {
+  ["ef8462"] = {position = {x = 16.77, y = 0.96, z = -20.12}, rotation = {x = 0.00, y = 150.00, z = 0.00}},
+  ["ff6c62"] = {position = {x = 30.53, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c96fb5"] = {position = {x = 31.82, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["6fe09d"] = {position = {x = 33.24, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ac350b"] = {position = {x = 40.76, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["9b8f17"] = {position = {x = 34.59, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c56b7d"] = {position = {x = 36.36, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["589ea6"] = {position = {x = 38.46, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["1ddd24"] = {position = {x = 8.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["ac26dd"] = {position = {x = 10.00, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["5a95f9"] = {position = {x = 11.50, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["a79eed"] = {position = {x = 13.00, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 45.00, z = 0.00}},
+  ["d42b88"] = {position = {x = 14.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["48d8b9"] = {position = {x = 18.51, y = 1.17, z = -23.45}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["40e5b5"] = {position = {x = 20.65, y = 1.17, z = -23.43}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["4e7a0a"] = {position = {x = 22.77, y = 1.24, z = -31.09}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["e867cd"] = {position = {x = 18.65, y = 1.30, z = -31.07}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["d1e5e5"] = {position = {x = 20.71, y = 1.27, z = -31.10}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["dee4c2"] = {position = {x = 18.61, y = 1.30, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["a8f3be"] = {position = {x = 20.72, y = 1.27, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["7e1849"] = {position = {x = 36.09, y = 0.96, z = -31.29}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["52d635"] = {position = {x = 48.89, y = 0.96, z = -28.75}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["1f16c7"] = {position = {x = 30.38, y = 1.36, z = -21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5b5f61"] = {position = {x = 30.43, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["cfe28e"] = {position = {x = 36.01, y = 1.36, z = -22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["743ac1"] = {position = {x = 36.02, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["655cb8"] = {position = {x = 31.53, y = 1.36, z = -31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["07f0ba"] = {position = {x = 34.46, y = 1.36, z = -31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["fc2206"] = {position = {x = 37.34, y = 1.36, z = -31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e53a65"] = {position = {x = 40.18, y = 1.36, z = -31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["537f39"] = {position = {x = 31.07, y = 1.16, z = -24.32}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["6bcf09"] = {position = {x = 9.65, y = 1.41, z = -31.08}, rotation = {x = 0.00, y = 180.00, z = 0.00}}
+}
+
+--Darlok Cabal--
+local objectToBag_DC = {
+  "a9772a", "a9f9d9", "9f704c", "5807c8", "f3cac4", "88eb5d", "ea670d", "e1923d",
+  "ec8dfb", "16e657", "2ce4f4", "d463a3", "1a2513", "414950", "3e007a", "1e97de",
+  "4d1222", "a58af8", "1eeb4b", "ac4e84", "b96f88", "37f54c", "f9a0bf", "ab40e9",
+  "7be120", "f5ac70", "d38c01", "7e5232", "dbc699", "2f804e", "352894", "62902b"
+}
+
+local objectPositions_DC_White = {
+  ["a9772a"] = {position = {x = -16.77, y = 1.08, z = 20.12}, rotation = {x = 355.70, y = 329.92, z = 2.49}},
+  ["a9f9d9"] = {position = {x = -30.53, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["9f704c"] = {position = {x = -31.82, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5807c8"] = {position = {x = -33.24, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f3cac4"] = {position = {x = -40.76, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["88eb5d"] = {position = {x = -34.59, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ea670d"] = {position = {x = -36.36, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e1923d"] = {position = {x = -38.46, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ec8dfb"] = {position = {x = -8.52, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["16e657"] = {position = {x = -10.02, y = 1.07, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["2ce4f4"] = {position = {x = -11.52, y = 1.07, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["d463a3"] = {position = {x = -13.02, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 225.00, z = 0.00}},
+  ["1a2513"] = {position = {x = -14.52, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["414950"] = {position = {x = -18.51, y = 1.17, z = 23.45}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["3e007a"] = {position = {x = -20.65, y = 1.17, z = 23.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["1e97de"] = {position = {x = -22.82, y = 1.17, z = 31.09}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["4d1222"] = {position = {x = -18.71, y = 1.17, z = 31.07}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["a58af8"] = {position = {x = -20.76, y = 1.17, z = 31.10}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["1eeb4b"] = {position = {x = -18.66, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["ac4e84"] = {position = {x = -20.77, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["b96f88"] = {position = {x = -36.09, y = 0.96, z = 31.29}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["37f54c"] = {position = {x = -48.89, y = 0.96, z = 28.75}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f9a0bf"] = {position = {x = -30.38, y = 1.36, z = 21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ab40e9"] = {position = {x = -30.43, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7be120"] = {position = {x = -36.01, y = 1.36, z = 22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f5ac70"] = {position = {x = -36.02, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["d38c01"] = {position = {x = -31.53, y = 1.36, z = 31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7e5232"] = {position = {x = -34.46, y = 1.36, z = 31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["dbc699"] = {position = {x = -37.34, y = 1.36, z = 31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2f804e"] = {position = {x = -40.18, y = 1.36, z = 31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["352894"] = {position = {x = -31.07, y = 1.16, z = 24.32}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["62902b"] = {position = {x = -9.65, y = 1.41, z = 31.08}, rotation = {x = 0.00, y = 0.00, z = 0.00}}
+}
+
+local objectPositions_DC_Red = {
+  ["a9772a"] = {position = {x = -16.77, y = 0.96, z = -20.12}, rotation = {x = 0.00, y = 150.00, z = 0.00}},
+  ["a9f9d9"] = {position = {x = -30.53, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["9f704c"] = {position = {x = -31.82, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5807c8"] = {position = {x = -33.24, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f3cac4"] = {position = {x = -40.76, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["88eb5d"] = {position = {x = -34.59, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ea670d"] = {position = {x = -36.36, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e1923d"] = {position = {x = -38.46, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ec8dfb"] = {position = {x = -8.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["16e657"] = {position = {x = -10.00, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["2ce4f4"] = {position = {x = -11.50, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["d463a3"] = {position = {x = -13.00, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 45.00, z = 0.00}},
+  ["1a2513"] = {position = {x = -14.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["414950"] = {position = {x = -17.57, y = 1.17, z = -23.45}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["3e007a"] = {position = {x = -15.43, y = 1.17, z = -23.44}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["1e97de"] = {position = {x = -13.20, y = 1.24, z = -31.09}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["4d1222"] = {position = {x = -17.31, y = 1.30, z = -31.07}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["a58af8"] = {position = {x = -15.26, y = 1.27, z = -31.10}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["1eeb4b"] = {position = {x = -17.36, y = 1.30, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["ac4e84"] = {position = {x = -15.25, y = 1.27, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["b96f88"] = {position = {x = -36.09, y = 0.96, z = -31.29}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["37f54c"] = {position = {x = -48.89, y = 0.96, z = -28.75}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["f9a0bf"] = {position = {x = -40.48, y = 1.36, z = -21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ab40e9"] = {position = {x = -40.44, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7be120"] = {position = {x = -34.85, y = 1.36, z = -22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f5ac70"] = {position = {x = -34.85, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["d38c01"] = {position = {x = -40.65, y = 1.36, z = -31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7e5232"] = {position = {x = -37.72, y = 1.36, z = -31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["dbc699"] = {position = {x = -34.84, y = 1.36, z = -31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2f804e"] = {position = {x = -32.00, y = 1.36, z = -31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["352894"] = {position = {x = -39.79, y = 1.16, z = -24.32}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["62902b"] = {position = {x = -26.37, y = 1.17, z = -31.08}, rotation = {x = 0.00, y = 180.00, z = 0.00}}
+}
+
+local objectPositions_DC_Blue = {
+  ["a9772a"] = {position = {x = 16.77, y = 1.08, z = 20.12}, rotation = {x = 355.67, y = 329.91, z = 2.50}},
+  ["a9f9d9"] = {position = {x = 30.53, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["9f704c"] = {position = {x = 31.82, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5807c8"] = {position = {x = 33.24, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f3cac4"] = {position = {x = 40.76, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["88eb5d"] = {position = {x = 34.59, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ea670d"] = {position = {x = 36.36, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e1923d"] = {position = {x = 38.46, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ec8dfb"] = {position = {x = 8.43, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["16e657"] = {position = {x = 9.93, y = 1.07, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["2ce4f4"] = {position = {x = 11.43, y = 1.07, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["d463a3"] = {position = {x = 12.93, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 225.00, z = 0.00}},
+  ["1a2513"] = {position = {x = 14.43, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["414950"] = {position = {x = 17.57, y = 1.17, z = 23.45}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["3e007a"] = {position = {x = 15.43, y = 1.17, z = 23.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["1e97de"] = {position = {x = 13.26, y = 1.17, z = 31.09}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["4d1222"] = {position = {x = 17.37, y = 1.17, z = 31.07}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["a58af8"] = {position = {x = 15.33, y = 1.17, z = 31.10}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["1eeb4b"] = {position = {x = 17.42, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["ac4e84"] = {position = {x = 15.31, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["b96f88"] = {position = {x = 36.09, y = 0.96, z = 31.29}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["37f54c"] = {position = {x = 48.89, y = 0.96, z = 28.75}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f9a0bf"] = {position = {x = 40.48, y = 1.36, z = 21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ab40e9"] = {position = {x = 40.44, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7be120"] = {position = {x = 34.85, y = 1.36, z = 22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f5ac70"] = {position = {x = 34.85, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["d38c01"] = {position = {x = 40.65, y = 1.36, z = 31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7e5232"] = {position = {x = 37.72, y = 1.36, z = 31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["dbc699"] = {position = {x = 34.84, y = 1.36, z = 31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2f804e"] = {position = {x = 32.00, y = 1.36, z = 31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["352894"] = {position = {x = 39.79, y = 1.16, z = 24.32}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["62902b"] = {position = {x = 26.37, y = 1.17, z = 31.08}, rotation = {x = 0.00, y = 0.00, z = 0.00}}
+}
+
+local objectPositions_DC_Pink = {
+  ["a9772a"] = {position = {x = 16.77, y = 0.96, z = -20.12}, rotation = {x = 0.00, y = 150.00, z = 0.00}},
+  ["a9f9d9"] = {position = {x = 30.53, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["9f704c"] = {position = {x = 31.82, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5807c8"] = {position = {x = 33.24, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f3cac4"] = {position = {x = 40.76, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["88eb5d"] = {position = {x = 34.59, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ea670d"] = {position = {x = 36.36, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["e1923d"] = {position = {x = 38.46, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ec8dfb"] = {position = {x = 8.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["16e657"] = {position = {x = 10.00, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["2ce4f4"] = {position = {x = 11.50, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["d463a3"] = {position = {x = 13.00, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 45.00, z = 0.00}},
+  ["1a2513"] = {position = {x = 14.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["414950"] = {position = {x = 18.51, y = 1.17, z = -23.45}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["3e007a"] = {position = {x = 20.65, y = 1.17, z = -23.43}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["1e97de"] = {position = {x = 22.77, y = 1.24, z = -31.09}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["4d1222"] = {position = {x = 18.65, y = 1.30, z = -31.07}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["a58af8"] = {position = {x = 20.71, y = 1.27, z = -31.10}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["1eeb4b"] = {position = {x = 18.61, y = 1.30, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["ac4e84"] = {position = {x = 20.72, y = 1.27, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["b96f88"] = {position = {x = 36.09, y = 0.96, z = -31.29}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["37f54c"] = {position = {x = 48.89, y = 0.96, z = -28.75}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["f9a0bf"] = {position = {x = 30.38, y = 1.36, z = -21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ab40e9"] = {position = {x = 30.43, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7be120"] = {position = {x = 36.01, y = 1.36, z = -22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f5ac70"] = {position = {x = 36.02, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["d38c01"] = {position = {x = 31.53, y = 1.36, z = -31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7e5232"] = {position = {x = 34.46, y = 1.36, z = -31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["dbc699"] = {position = {x = 37.34, y = 1.36, z = -31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["2f804e"] = {position = {x = 40.18, y = 1.36, z = -31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["352894"] = {position = {x = 31.07, y = 1.16, z = -24.32}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["62902b"] = {position = {x = 9.65, y = 1.41, z = -31.08}, rotation = {x = 0.00, y = 180.00, z = 0.00}}
+}
+
+--Psilon Quanta--
+local objectToBag_PQ = {
+  "71cc73", "501981", "5bd1eb", "41819f", "c0b703", "810b2a", "af3f4f", "11a311",
+  "7509aa", "b76ef1", "75d995", "863efa", "300040", "df099c", "5f2643", "57400b",
+  "58d8e2", "a207f6", "eee042", "8e88e1", "eb3297", "afba99", "26a51f", "591449",
+  "27e963", "7f90bb", "0186bd", "5ea553", "72c52a", "baeb41", "09b4cb", "742811"
+}
+
+local objectPositions_PQ_White = {
+  ["71cc73"] = {position = {x = -16.77, y = 1.08, z = 20.12}, rotation = {x = 355.70, y = 329.92, z = 2.49}},
+  ["501981"] = {position = {x = -30.53, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5bd1eb"] = {position = {x = -31.82, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["41819f"] = {position = {x = -33.24, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c0b703"] = {position = {x = -40.76, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["810b2a"] = {position = {x = -34.59, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["af3f4f"] = {position = {x = -36.36, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["11a311"] = {position = {x = -38.46, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7509aa"] = {position = {x = -8.52, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["b76ef1"] = {position = {x = -10.02, y = 1.07, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["75d995"] = {position = {x = -11.52, y = 1.07, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["863efa"] = {position = {x = -13.02, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 225.00, z = 0.00}},
+  ["300040"] = {position = {x = -14.52, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["df099c"] = {position = {x = -18.51, y = 1.17, z = 23.45}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5f2643"] = {position = {x = -20.65, y = 1.17, z = 23.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["57400b"] = {position = {x = -22.82, y = 1.17, z = 31.09}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["58d8e2"] = {position = {x = -18.71, y = 1.17, z = 31.07}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["a207f6"] = {position = {x = -20.76, y = 1.17, z = 31.10}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["eee042"] = {position = {x = -18.66, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["8e88e1"] = {position = {x = -20.77, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["eb3297"] = {position = {x = -36.09, y = 0.96, z = 31.29}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["afba99"] = {position = {x = -48.89, y = 0.96, z = 28.75}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["26a51f"] = {position = {x = -30.38, y = 1.36, z = 21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["591449"] = {position = {x = -30.43, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["27e963"] = {position = {x = -36.01, y = 1.36, z = 22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7f90bb"] = {position = {x = -36.02, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["0186bd"] = {position = {x = -31.53, y = 1.36, z = 31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5ea553"] = {position = {x = -34.46, y = 1.36, z = 31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["72c52a"] = {position = {x = -37.34, y = 1.36, z = 31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["baeb41"] = {position = {x = -40.18, y = 1.36, z = 31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["09b4cb"] = {position = {x = -31.07, y = 1.16, z = 24.32}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["742811"] = {position = {x = -9.65, y = 1.41, z = 31.08}, rotation = {x = 0.00, y = 0.00, z = 0.00}}
+}
+
+local objectPositions_PQ_Red = {
+  ["71cc73"] = {position = {x = -16.77, y = 0.96, z = -20.12}, rotation = {x = 0.00, y = 150.00, z = 0.00}},
+  ["501981"] = {position = {x = -30.53, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5bd1eb"] = {position = {x = -31.82, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["41819f"] = {position = {x = -33.24, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c0b703"] = {position = {x = -40.76, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["810b2a"] = {position = {x = -34.59, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["af3f4f"] = {position = {x = -36.36, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["11a311"] = {position = {x = -38.46, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7509aa"] = {position = {x = -8.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["b76ef1"] = {position = {x = -10.00, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["75d995"] = {position = {x = -11.50, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["863efa"] = {position = {x = -13.00, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 45.00, z = 0.00}},
+  ["300040"] = {position = {x = -14.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["df099c"] = {position = {x = -17.57, y = 1.17, z = -23.45}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["5f2643"] = {position = {x = -15.43, y = 1.17, z = -23.44}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["57400b"] = {position = {x = -13.20, y = 1.24, z = -31.09}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["58d8e2"] = {position = {x = -17.31, y = 1.30, z = -31.07}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["a207f6"] = {position = {x = -15.26, y = 1.27, z = -31.10}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["eee042"] = {position = {x = -17.36, y = 1.30, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["8e88e1"] = {position = {x = -15.25, y = 1.27, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["eb3297"] = {position = {x = -36.09, y = 0.96, z = -31.29}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["afba99"] = {position = {x = -48.89, y = 0.96, z = -28.75}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["26a51f"] = {position = {x = -40.48, y = 1.36, z = -21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["591449"] = {position = {x = -40.44, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["27e963"] = {position = {x = -34.85, y = 1.36, z = -22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7f90bb"] = {position = {x = -34.85, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["0186bd"] = {position = {x = -40.65, y = 1.36, z = -31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5ea553"] = {position = {x = -37.72, y = 1.36, z = -31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["72c52a"] = {position = {x = -34.84, y = 1.36, z = -31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["baeb41"] = {position = {x = -32.00, y = 1.36, z = -31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["09b4cb"] = {position = {x = -39.79, y = 1.16, z = -24.32}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["742811"] = {position = {x = -26.37, y = 1.17, z = -31.08}, rotation = {x = 0.00, y = 180.00, z = 0.00}}
+}
+
+local objectPositions_PQ_Blue = {
+  ["71cc73"] = {position = {x = 16.77, y = 1.08, z = 20.12}, rotation = {x = 355.67, y = 329.91, z = 2.50}},
+  ["501981"] = {position = {x = 30.53, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5bd1eb"] = {position = {x = 31.82, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["41819f"] = {position = {x = 33.24, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c0b703"] = {position = {x = 40.76, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["810b2a"] = {position = {x = 34.59, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["af3f4f"] = {position = {x = 36.36, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["11a311"] = {position = {x = 38.46, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7509aa"] = {position = {x = 8.43, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["b76ef1"] = {position = {x = 9.93, y = 1.07, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["75d995"] = {position = {x = 11.43, y = 1.07, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["863efa"] = {position = {x = 12.93, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 225.00, z = 0.00}},
+  ["300040"] = {position = {x = 14.43, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["df099c"] = {position = {x = 17.57, y = 1.17, z = 23.45}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5f2643"] = {position = {x = 15.43, y = 1.17, z = 23.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["57400b"] = {position = {x = 13.26, y = 1.17, z = 31.09}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["58d8e2"] = {position = {x = 17.37, y = 1.17, z = 31.07}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["a207f6"] = {position = {x = 15.33, y = 1.17, z = 31.10}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["eee042"] = {position = {x = 17.42, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["8e88e1"] = {position = {x = 15.31, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["eb3297"] = {position = {x = 36.09, y = 0.96, z = 31.29}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["afba99"] = {position = {x = 48.89, y = 0.96, z = 28.75}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["26a51f"] = {position = {x = 40.48, y = 1.36, z = 21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["591449"] = {position = {x = 40.44, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["27e963"] = {position = {x = 34.85, y = 1.36, z = 22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7f90bb"] = {position = {x = 34.85, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["0186bd"] = {position = {x = 40.65, y = 1.36, z = 31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5ea553"] = {position = {x = 37.72, y = 1.36, z = 31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["72c52a"] = {position = {x = 34.84, y = 1.36, z = 31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["baeb41"] = {position = {x = 32.00, y = 1.36, z = 31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["09b4cb"] = {position = {x = 39.79, y = 1.16, z = 24.32}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["742811"] = {position = {x = 26.37, y = 1.17, z = 31.08}, rotation = {x = 0.00, y = 0.00, z = 0.00}}
+}
+
+local objectPositions_PQ_Pink = {
+  ["71cc73"] = {position = {x = 16.77, y = 0.96, z = -20.12}, rotation = {x = 0.00, y = 150.00, z = 0.00}},
+  ["501981"] = {position = {x = 30.53, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5bd1eb"] = {position = {x = 31.82, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["41819f"] = {position = {x = 33.24, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c0b703"] = {position = {x = 40.76, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["810b2a"] = {position = {x = 34.59, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["af3f4f"] = {position = {x = 36.36, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["11a311"] = {position = {x = 38.46, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7509aa"] = {position = {x = 8.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["b76ef1"] = {position = {x = 10.00, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["75d995"] = {position = {x = 11.50, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["863efa"] = {position = {x = 13.00, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 45.00, z = 0.00}},
+  ["300040"] = {position = {x = 14.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["df099c"] = {position = {x = 18.51, y = 1.17, z = -23.45}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["5f2643"] = {position = {x = 20.65, y = 1.17, z = -23.43}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["57400b"] = {position = {x = 22.77, y = 1.24, z = -31.09}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["58d8e2"] = {position = {x = 18.65, y = 1.30, z = -31.07}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["a207f6"] = {position = {x = 20.71, y = 1.27, z = -31.10}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["eee042"] = {position = {x = 18.61, y = 1.30, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["8e88e1"] = {position = {x = 20.72, y = 1.27, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["eb3297"] = {position = {x = 36.09, y = 0.96, z = -31.29}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["afba99"] = {position = {x = 48.89, y = 0.96, z = -28.75}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["26a51f"] = {position = {x = 30.38, y = 1.36, z = -21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["591449"] = {position = {x = 30.43, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["27e963"] = {position = {x = 36.01, y = 1.36, z = -22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7f90bb"] = {position = {x = 36.02, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["0186bd"] = {position = {x = 31.53, y = 1.36, z = -31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5ea553"] = {position = {x = 34.46, y = 1.36, z = -31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["72c52a"] = {position = {x = 37.34, y = 1.36, z = -31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["baeb41"] = {position = {x = 40.18, y = 1.36, z = -31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["09b4cb"] = {position = {x = 31.07, y = 1.16, z = -24.32}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["742811"] = {position = {x = 9.65, y = 1.41, z = -31.08}, rotation = {x = 0.00, y = 180.00, z = 0.00}}
+}
+
+--Silicoid Crag--
+local objectToBag_SC = {
+  "6101ad", "418a20", "f49694", "fca574", "c94b6b", "f5f9c4", "a40d73", "d54325",
+  "ffe865", "a77c20", "09a2fb", "c6e01a", "fbdcb1", "d1afc0", "7f8765", "ccc60e",
+  "372748", "08abb0", "001906", "4da5b0", "0c7d30", "20deab", "0dd520", "c10015",
+  "f9fc92", "5ebaf8", "3c9d99", "c95c6a", "08d17f", "b436f4", "74165d", "d5cdd7"
+}
+
+local objectPositions_SC_White = {
+  ["6101ad"] = {position = {x = -16.77, y = 1.08, z = 20.12}, rotation = {x = 355.70, y = 329.92, z = 2.49}},
+  ["418a20"] = {position = {x = -30.53, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f49694"] = {position = {x = -31.82, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["fca574"] = {position = {x = -33.24, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c94b6b"] = {position = {x = -40.76, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f5f9c4"] = {position = {x = -34.59, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["a40d73"] = {position = {x = -36.36, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["d54325"] = {position = {x = -38.46, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ffe865"] = {position = {x = -8.52, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["a77c20"] = {position = {x = -10.02, y = 1.07, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["09a2fb"] = {position = {x = -11.52, y = 1.07, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["c6e01a"] = {position = {x = -13.02, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 225.00, z = 0.00}},
+  ["fbdcb1"] = {position = {x = -14.52, y = 0.96, z = 20.12}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["d1afc0"] = {position = {x = -18.51, y = 1.17, z = 23.45}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7f8765"] = {position = {x = -20.65, y = 1.17, z = 23.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ccc60e"] = {position = {x = -22.82, y = 1.17, z = 31.09}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["372748"] = {position = {x = -18.71, y = 1.17, z = 31.07}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["08abb0"] = {position = {x = -20.76, y = 1.17, z = 31.10}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["001906"] = {position = {x = -18.66, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["4da5b0"] = {position = {x = -20.77, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["0c7d30"] = {position = {x = -36.09, y = 0.96, z = 31.29}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["20deab"] = {position = {x = -48.89, y = 0.96, z = 28.75}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["0dd520"] = {position = {x = -30.38, y = 1.36, z = 21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c10015"] = {position = {x = -30.43, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f9fc92"] = {position = {x = -36.01, y = 1.36, z = 22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5ebaf8"] = {position = {x = -36.02, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["3c9d99"] = {position = {x = -31.53, y = 1.36, z = 31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c95c6a"] = {position = {x = -34.46, y = 1.36, z = 31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["08d17f"] = {position = {x = -37.34, y = 1.36, z = 31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["b436f4"] = {position = {x = -40.18, y = 1.36, z = 31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["74165d"] = {position = {x = -31.07, y = 1.16, z = 24.32}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["d5cdd7"] = {position = {x = -9.65, y = 1.41, z = 31.08}, rotation = {x = 0.00, y = 0.00, z = 0.00}}
+}
+
+local objectPositions_SC_Red = {
+  ["6101ad"] = {position = {x = -16.77, y = 0.96, z = -20.12}, rotation = {x = 0.00, y = 150.00, z = 0.00}},
+  ["418a20"] = {position = {x = -30.53, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f49694"] = {position = {x = -31.82, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["fca574"] = {position = {x = -33.24, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c94b6b"] = {position = {x = -40.76, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f5f9c4"] = {position = {x = -34.59, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["a40d73"] = {position = {x = -36.36, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["d54325"] = {position = {x = -38.46, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ffe865"] = {position = {x = -8.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["a77c20"] = {position = {x = -10.00, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["09a2fb"] = {position = {x = -11.50, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["c6e01a"] = {position = {x = -13.00, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 45.00, z = 0.00}},
+  ["fbdcb1"] = {position = {x = -14.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["d1afc0"] = {position = {x = -17.57, y = 1.17, z = -23.45}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["7f8765"] = {position = {x = -15.43, y = 1.17, z = -23.44}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["ccc60e"] = {position = {x = -13.20, y = 1.24, z = -31.09}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["372748"] = {position = {x = -17.31, y = 1.30, z = -31.07}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["08abb0"] = {position = {x = -15.26, y = 1.27, z = -31.10}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["001906"] = {position = {x = -17.36, y = 1.30, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["4da5b0"] = {position = {x = -15.25, y = 1.27, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["0c7d30"] = {position = {x = -36.09, y = 0.96, z = -31.29}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["20deab"] = {position = {x = -48.89, y = 0.96, z = -28.75}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["0dd520"] = {position = {x = -40.48, y = 1.36, z = -21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c10015"] = {position = {x = -40.44, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f9fc92"] = {position = {x = -34.85, y = 1.36, z = -22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5ebaf8"] = {position = {x = -34.85, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["3c9d99"] = {position = {x = -40.65, y = 1.36, z = -31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c95c6a"] = {position = {x = -37.72, y = 1.36, z = -31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["08d17f"] = {position = {x = -34.84, y = 1.36, z = -31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["b436f4"] = {position = {x = -32.00, y = 1.36, z = -31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["74165d"] = {position = {x = -39.79, y = 1.16, z = -24.32}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["d5cdd7"] = {position = {x = -26.37, y = 1.17, z = -31.08}, rotation = {x = 0.00, y = 180.00, z = 0.00}}
+}
+
+local objectPositions_SC_Blue = {
+  ["6101ad"] = {position = {x = 16.77, y = 1.08, z = 20.12}, rotation = {x = 355.67, y = 329.91, z = 2.50}},
+  ["418a20"] = {position = {x = 30.53, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f49694"] = {position = {x = 31.82, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["fca574"] = {position = {x = 33.24, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c94b6b"] = {position = {x = 40.76, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f5f9c4"] = {position = {x = 34.59, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["a40d73"] = {position = {x = 36.36, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["d54325"] = {position = {x = 38.46, y = 0.96, z = 20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ffe865"] = {position = {x = 8.43, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["a77c20"] = {position = {x = 9.93, y = 1.07, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["09a2fb"] = {position = {x = 11.43, y = 1.07, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 180.00}},
+  ["c6e01a"] = {position = {x = 12.93, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 225.00, z = 0.00}},
+  ["fbdcb1"] = {position = {x = 14.43, y = 0.96, z = 20.19}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["d1afc0"] = {position = {x = 17.57, y = 1.17, z = 23.45}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["7f8765"] = {position = {x = 15.43, y = 1.17, z = 23.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ccc60e"] = {position = {x = 13.26, y = 1.17, z = 31.09}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["372748"] = {position = {x = 17.37, y = 1.17, z = 31.07}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["08abb0"] = {position = {x = 15.33, y = 1.17, z = 31.10}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["001906"] = {position = {x = 17.42, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["4da5b0"] = {position = {x = 15.31, y = 1.17, z = 34.22}, rotation = {x = 0.00, y = 0.00, z = 0.73}},
+  ["0c7d30"] = {position = {x = 36.09, y = 0.96, z = 31.29}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["20deab"] = {position = {x = 48.89, y = 0.96, z = 28.75}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["0dd520"] = {position = {x = 40.48, y = 1.36, z = 21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c10015"] = {position = {x = 40.44, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f9fc92"] = {position = {x = 34.85, y = 1.36, z = 22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5ebaf8"] = {position = {x = 34.85, y = 1.36, z = 23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["3c9d99"] = {position = {x = 40.65, y = 1.36, z = 31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c95c6a"] = {position = {x = 37.72, y = 1.36, z = 31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["08d17f"] = {position = {x = 34.84, y = 1.36, z = 31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["b436f4"] = {position = {x = 32.00, y = 1.36, z = 31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["74165d"] = {position = {x = 39.79, y = 1.16, z = 24.32}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["d5cdd7"] = {position = {x = 26.37, y = 1.17, z = 31.08}, rotation = {x = 0.00, y = 0.00, z = 0.00}}
+}
+
+local objectPositions_SC_Pink = {
+  ["6101ad"] = {position = {x = 16.77, y = 0.96, z = -20.12}, rotation = {x = 0.00, y = 150.00, z = 0.00}},
+  ["418a20"] = {position = {x = 30.53, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f49694"] = {position = {x = 31.82, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["fca574"] = {position = {x = 33.24, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c94b6b"] = {position = {x = 40.76, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f5f9c4"] = {position = {x = 34.59, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["a40d73"] = {position = {x = 36.36, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["d54325"] = {position = {x = 38.46, y = 0.96, z = -20.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["ffe865"] = {position = {x = 8.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["a77c20"] = {position = {x = 10.00, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["09a2fb"] = {position = {x = 11.50, y = 1.07, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 180.00}},
+  ["c6e01a"] = {position = {x = 13.00, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 45.00, z = 0.00}},
+  ["fbdcb1"] = {position = {x = 14.50, y = 0.96, z = -20.50}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["d1afc0"] = {position = {x = 18.51, y = 1.17, z = -23.45}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["7f8765"] = {position = {x = 20.65, y = 1.17, z = -23.43}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["ccc60e"] = {position = {x = 22.77, y = 1.24, z = -31.09}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["372748"] = {position = {x = 18.65, y = 1.30, z = -31.07}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["08abb0"] = {position = {x = 20.71, y = 1.27, z = -31.10}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["001906"] = {position = {x = 18.61, y = 1.30, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["4da5b0"] = {position = {x = 20.72, y = 1.27, z = -34.22}, rotation = {x = 0.00, y = 180.00, z = 0.73}},
+  ["0c7d30"] = {position = {x = 36.09, y = 0.96, z = -31.29}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["20deab"] = {position = {x = 48.89, y = 0.96, z = -28.75}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["0dd520"] = {position = {x = 30.38, y = 1.36, z = -21.98}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c10015"] = {position = {x = 30.43, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["f9fc92"] = {position = {x = 36.01, y = 1.36, z = -22.00}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["5ebaf8"] = {position = {x = 36.02, y = 1.36, z = -23.18}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["3c9d99"] = {position = {x = 31.53, y = 1.36, z = -31.43}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["c95c6a"] = {position = {x = 34.46, y = 1.36, z = -31.42}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["08d17f"] = {position = {x = 37.34, y = 1.36, z = -31.48}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["b436f4"] = {position = {x = 40.18, y = 1.36, z = -31.50}, rotation = {x = 0.00, y = 0.00, z = 0.00}},
+  ["74165d"] = {position = {x = 31.07, y = 1.16, z = -24.32}, rotation = {x = 0.00, y = 180.00, z = 0.00}},
+  ["d5cdd7"] = {position = {x = 9.65, y = 1.41, z = -31.08}, rotation = {x = 0.00, y = 180.00, z = 0.00}}
+}
+
+function onLoad()
+    spawnFraction()
+    spawnButtonDrawFraction()
+    spawnButtonReset()
+end
+
+function spawnFraction()
+    self.createButton({
+        click_function = "spawnAdditionalButtons",
+        function_owner = self,
+        label = "Empire",
+        position = {0, 0.3, 0},
+        rotation = {0, 180, 0},
+        width = 1600,
+        height = 500,
+        font_size = 200,
+        color = {0.16862745098039217, 0.43529411764705883, 0.6627450980392157},
+        font_color = {1, 1, 1}
+    })
+end
+
+function spawnAdditionalButtons()
+    if not buttonsSpawned then
+        --print(1)
+        spawnButton_SC()
+        spawnButton_TROS()
+        spawnButton_BE()
+        spawnButton_KH()
+        spawnButton_DC()
+        spawnButton_PQ()
+        buttonsSpawned = true
+    end
+end
+
+function hideButtons()
+    for i = 3, 8 do
+        self.removeButton(i)
+    end
+    buttonIds = {}
+    buttonsSpawned = false
+end
+
+function spawnButton_SC()
+  self.createButton({
+      click_function = "layOutObjects_SC",
+      function_owner = self,
+      label = "Silicoid Crag",
+      position = {-3.3, 0.3, 0},
+      rotation = {0, 180, 0},
+      width = 1600,
+      height = 500,
+      font_size = 200,
+      color = {0.16862745098039217, 0.43529411764705883, 0.6627450980392157},
+      font_color = {1, 1, 1}
+  })
+end
+
+function spawnButton_TROS()
+  self.createButton({
+      click_function = "layOutObjects_TROS",
+      function_owner = self,
+      label = "The Republic of Sol",
+      position = {-3.3, 0.3, -1.2},
+      rotation = {0, 180, 0},
+      width = 1600,
+      height = 500,
+      font_size = 200,
+      color = {0.16862745098039217, 0.43529411764705883, 0.6627450980392157},
+      font_color = {1, 1, 1}
+  })
+end
+
+function spawnButton_BE()
+  self.createButton({
+      click_function = "layOutObjects_BE",
+      function_owner = self,
+      label = "Bulrathi Empire",
+      position = {-3.3, 0.3, -2.4},
+      rotation = {0, 180, 0},
+      width = 1600,
+      height = 500,
+      font_size = 200,
+      color = {0.16862745098039217, 0.43529411764705883, 0.6627450980392157},
+      font_color = {1, 1, 1}
+  })
+end
+
+function spawnButton_KH()
+  self.createButton({
+      click_function = "layOutObjects_KH",
+      function_owner = self,
+      label = "Klackon Hive",
+      position = {-3.3, 0.3, -3.6},
+      rotation = {0, 180, 0},
+      width = 1600,
+      height = 500,
+      font_size = 200,
+      color = {0.16862745098039217, 0.43529411764705883, 0.6627450980392157},
+      font_color = {1, 1, 1}
+  })
+end
+
+function spawnButton_DC()
+  self.createButton({
+      click_function = "layOutObjects_DC",
+      function_owner = self,
+      label = "Darlok Cabal",
+      position = {-3.3, 0.3, -4.8},
+      rotation = {0, 180, 0},
+      width = 1600,
+      height = 500,
+      font_size = 200,
+      color = {0.16862745098039217, 0.43529411764705883, 0.6627450980392157},
+      font_color = {1, 1, 1}
+  })
+end
+
+function spawnButton_PQ()
+  self.createButton({
+      click_function = "layOutObjects_PQ",
+      function_owner = self,
+      label = "Psilon Quanta",
+      position = {-3.3, 0.3, -6.0},
+      rotation = {0, 180, 0},
+      width = 1600,
+      height = 500,
+      font_size = 200,
+      color = {0.16862745098039217, 0.43529411764705883, 0.6627450980392157},
+      font_color = {1, 1, 1}
+  })
+end
+
+function spawnButtonDrawFraction()
+  self.createButton({
+      click_function = "drawFraction",
+      function_owner = self,
+      label = "Draw empire",
+      position = {0, 0.3, -1.2},
+      rotation = {0, 180, 0},
+      width = 1600,
+      height = 500,
+      font_size = 200,
+      color = {0.16862745098039217, 0.43529411764705883, 0.6627450980392157},
+      font_color = {1, 1, 1}
+  })
+  randomFlage = true
+end
+
+function spawnButtonReset()
+  self.createButton({
+      click_function = "collectElementsToBag",
+      function_owner = self,
+      label = "Reset",
+      position = {0, 0.3, -2.4}, --{0, 0.3, -7.2}
+      rotation = {0, 180, 0},
+      width = 1600,
+      height = 500,
+      font_size = 200,
+      color = {0.16862745098039217, 0.43529411764705883, 0.6627450980392157},
+      font_color = {1, 1, 1}
+  })
+end
+
+function getPlayerobjectPositions_SC(player_color)
+    if player_color == "Pink" then
+      return objectPositions_SC_Pink
+    elseif player_color == "White" then
+      return objectPositions_SC_White
+    elseif player_color == "Red" then
+      return objectPositions_SC_Red
+    elseif player_color == "Blue" then
+      return objectPositions_SC_Blue
+    end
+end
+
+function getPlayerobjectPositions_PQ(player_color)
+    if player_color == "Pink" then
+      return objectPositions_PQ_Pink
+    elseif player_color == "White" then
+      return objectPositions_PQ_White
+    elseif player_color == "Red" then
+      return objectPositions_PQ_Red
+    elseif player_color == "Blue" then
+      return objectPositions_PQ_Blue
+    end
+end
+
+function getPlayerobjectPositions_DC(player_color)
+    if player_color == "Pink" then
+      return objectPositions_DC_Pink
+    elseif player_color == "White" then
+      return objectPositions_DC_White
+    elseif player_color == "Red" then
+      return objectPositions_DC_Red
+    elseif player_color == "Blue" then
+      return objectPositions_DC_Blue
+    end
+end
+
+function getPlayerobjectPositions_KH(player_color)
+    if player_color == "Pink" then
+      return objectPositions_KH_Pink
+    elseif player_color == "White" then
+      return objectPositions_KH_White
+    elseif player_color == "Red" then
+      return objectPositions_KH_Red
+    elseif player_color == "Blue" then
+      return objectPositions_KH_Blue
+    end
+end
+
+function getPlayerobjectPositions_BE(player_color)
+    if player_color == "Pink" then
+      return objectPositions_BE_Pink
+    elseif player_color == "White" then
+      return objectPositions_BE_White
+    elseif player_color == "Red" then
+      return objectPositions_BE_Red
+    elseif player_color == "Blue" then
+      return objectPositions_BE_Blue
+    end
+end
+
+function getPlayerobjectPositions_TROS(player_color)
+    if player_color == "Pink" then
+      return objectPositions_TROS_Pink
+    elseif player_color == "White" then
+      return objectPositions_TROS_White
+    elseif player_color == "Red" then
+      return objectPositions_TROS_Red
+    elseif player_color == "Blue" then
+      return objectPositions_TROS_Blue
+    end
+end
+
+function layOutObjects_SC(_, player_color)
+    if randomFlage == false then
+      hideButtons()
+    else
+      randomFlage = false
+    end
+    local player_color = player_color
+    if getFraction == "" then
+      if player_color == "Blue" then
+        local library = getObjectFromGUID(libraryGUID)
+
+        if library.call("isFractionGET", "fractionFLAGE_SC") then
+          local objectPositions = getPlayerobjectPositions_SC(player_color)
+
+          local data = {
+                bagGUID = bagGUID_SC,
+                objectPositions = objectPositions,
+                buttonGUID = buttonGUID
+          }
+
+          local jsonData = JSON.encode(data)
+          library.call("layOutObjects", jsonData)
+          library.call("setFractionFLAGE", "fractionFLAGE_SC")
+          getFraction = "SC"
+        end
+      end
+    end
+end
+
+function layOutObjects_TROS(_, player_color)
+    if randomFlage == false then
+      hideButtons()
+    else
+      randomFlage = false
+    end
+    local player_color = player_color
+    if getFraction == "" then
+      if player_color == "Blue" then
+        local library = getObjectFromGUID(libraryGUID)
+        if library.call("isFractionGET", "fractionFLAGE_TROS") then
+
+          local objectPositions = getPlayerobjectPositions_TROS(player_color)
+
+          local data = {
+                bagGUID = bagGUID_TROS,
+                objectPositions = objectPositions,
+                buttonGUID = buttonGUID
+          }
+
+          local jsonData = JSON.encode(data)
+          library.call("layOutObjects", jsonData)
+          library.call("setFractionFLAGE", "fractionFLAGE_TROS")
+          getFraction = "TROS"
+        end
+      end
+    end
+end
+
+function layOutObjects_BE(_, player_color)
+    if randomFlage == false then
+      hideButtons()
+    else
+      randomFlage = false
+    end
+    local player_color = player_color
+    if getFraction == "" then
+      if player_color == "Blue" then
+        local library = getObjectFromGUID(libraryGUID)
+
+        if library.call("isFractionGET", "fractionFLAGE_BE") then
+          local objectPositions = getPlayerobjectPositions_BE(player_color)
+
+          local data = {
+                bagGUID = bagGUID_BE,
+                objectPositions = objectPositions,
+                buttonGUID = buttonGUID
+          }
+
+          local jsonData = JSON.encode(data)
+          library.call("layOutObjects", jsonData)
+          library.call("setFractionFLAGE", "fractionFLAGE_BE")
+          getFraction = "BE"
+        end
+      end
+    end
+end
+
+function layOutObjects_DC(_, player_color)
+    if randomFlage == false then
+      hideButtons()
+    else
+      randomFlage = false
+    end
+    local player_color = player_color
+    if getFraction == "" then
+      if player_color == "Blue" then
+        local library = getObjectFromGUID(libraryGUID)
+
+        if library.call("isFractionGET", "fractionFLAGE_DC") then
+          local objectPositions = getPlayerobjectPositions_DC(player_color)
+
+          local data = {
+                bagGUID = bagGUID_DC,
+                objectPositions = objectPositions,
+                buttonGUID = buttonGUID
+          }
+
+          local jsonData = JSON.encode(data)
+          library.call("layOutObjects", jsonData)
+          library.call("setFractionFLAGE", "fractionFLAGE_DC")
+          getFraction = "DC"
+        end
+      end
+    end
+end
+
+function layOutObjects_PQ(_, player_color)
+    if randomFlage == false then
+      hideButtons()
+    else
+      randomFlage = false
+    end
+    local player_color = player_color
+    if getFraction == "" then
+      if player_color == "Blue" then
+        local library = getObjectFromGUID(libraryGUID)
+        if library.call("isFractionGET", "fractionFLAGE_PQ") then
+
+          local objectPositions = getPlayerobjectPositions_PQ(player_color)
+
+          local data = {
+                bagGUID = bagGUID_PQ,
+                objectPositions = objectPositions,
+                buttonGUID = buttonGUID
+          }
+
+          local jsonData = JSON.encode(data)
+          library.call("layOutObjects", jsonData)
+          library.call("setFractionFLAGE", "fractionFLAGE_PQ")
+          getFraction = "PQ"
+        end
+      end
+    end
+end
+
+function layOutObjects_KH(_, player_color)
+    if randomFlage == false then
+      hideButtons()
+    else
+      randomFlage = false
+    end
+    local player_color = player_color
+    if getFraction == "" then
+      if player_color == "Blue" then
+        local library = getObjectFromGUID(libraryGUID)
+        if library.call("isFractionGET", "fractionFLAGE_KH") then
+
+          local objectPositions = getPlayerobjectPositions_KH(player_color)
+
+          local data = {
+                bagGUID = bagGUID_KH,
+                objectPositions = objectPositions,
+                buttonGUID = buttonGUID
+          }
+
+          local jsonData = JSON.encode(data)
+          library.call("layOutObjects", jsonData)
+          library.call("setFractionFLAGE", "fractionFLAGE_KH")
+          getFraction = "KH"
+        end
+      end
+    end
+end
+
+function collectElementsToBag()
+  if getFraction == "SC" then
+    objectToBag = objectToBag_SC
+    bagGUID = bagGUID_SC
+  elseif getFraction == "TROS" then
+    objectToBag = objectToBag_TROS
+    bagGUID = bagGUID_TROS
+  elseif getFraction == "BE" then
+    objectToBag = objectToBag_BE
+    bagGUID = bagGUID_BE
+  elseif getFraction == "KH" then
+    objectToBag = objectToBag_KH
+    bagGUID = bagGUID_KH
+  elseif getFraction == "DC" then
+    objectToBag = objectToBag_DC
+    bagGUID = bagGUID_DC
+  elseif getFraction == "PQ" then
+    objectToBag = objectToBag_PQ
+    bagGUID = bagGUID_PQ
+  else
+    return
+  end
+  local library = getObjectFromGUID(libraryGUID)
+
+  for _, objToBag in pairs(objectToBag) do
+    local obj = getObjectFromGUID(objToBag)
+    local bag = getObjectFromGUID(bagGUID)
+
+    if obj and bag then
+        bag.putObject(obj)
+      else
+        return
+    end
+  end
+  if getFraction == "SC" then
+    library.call("setFractionFLAGE", "fractionFLAGE_SC")
+    getFraction = ""
+  elseif getFraction == "TROS" then
+    library.call("setFractionFLAGE", "fractionFLAGE_TROS")
+    getFraction = ""
+  elseif getFraction == "BE" then
+    library.call("setFractionFLAGE", "fractionFLAGE_BE")
+    getFraction = ""
+  elseif getFraction == "KH" then
+    library.call("setFractionFLAGE", "fractionFLAGE_KH")
+    getFraction = ""
+  elseif getFraction == "DC" then
+    library.call("setFractionFLAGE", "fractionFLAGE_DC")
+    getFraction = ""
+  elseif getFraction == "PQ" then
+    library.call("setFractionFLAGE", "fractionFLAGE_PQ")
+    getFraction = ""
+  else
+    return
+  end
+end
+
+function drawFraction(_, player_color)
+  if buttonsSpawned == false then
+    randomFlage = true
+  end
+  if buttonsSpawned == true then
+    randomFlage = false
+  end
+  local player_color = player_color
+  local fractionTable = {"SC", "TROS", "BE", "KH", "DC", "PQ"}
+  while true do
+    local rIndex = math.random(1, #fractionTable)
+    local randomFraction = fractionTable[rIndex]
+
+    if randomFraction == "SC" then
+      layOutObjects_SC(_, player_color)
+    elseif randomFraction == "TROS" then
+      layOutObjects_TROS(_, player_color)
+    elseif randomFraction == "BE" then
+      layOutObjects_BE(_, player_color)
+    elseif randomFraction == "KH" then
+      layOutObjects_KH(_, player_color)
+    elseif randomFraction == "DC" then
+      layOutObjects_DC(_, player_color)
+    elseif randomFraction == "PQ" then
+      layOutObjects_PQ(_, player_color)
+    end
+
+    if getFraction ~= "" then
+      break
+    end
+  end
+end
