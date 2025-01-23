@@ -1,6 +1,8 @@
 # Master-of-Orion-TTS-Prototype-
 Projec in LUA scripts
 
+Link: https://steamcommunity.com/sharedfiles/filedetails/?id=3403926596
+
 ### Opis projektu  
 W ramach projektu moim zadaniem było opracowanie mechaniki rozstawiania początkowego obiektów na stole do gry, co miało znacząco ułatwić i przyspieszyć rozpoczęcie rozgrywki. Realizacja mechanizmu opierała się na identyfikacji obiektów z dedykowanych worków frakcji za pomocą unikalnych identyfikatorów (**ID**). Po pobraniu obiektu gracz mógł umieścić go na planszy w odpowiedniej pozycji, przypisanej do konkretnego gracza na podstawie danych z tablicy pozycji.  
 
